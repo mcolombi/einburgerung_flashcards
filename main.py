@@ -17,6 +17,7 @@ class FlashcardApp:
         )
         self.question_label.pack(pady=20)
 
+
         self.answer_buttons = []
         for i in range(4):
             button = tk.Button(
@@ -30,6 +31,10 @@ class FlashcardApp:
             )
             button.pack(pady=5)
             self.answer_buttons.append(button)
+
+        # Label for displaying accuracy
+        self.general_stats_label = tk.Label(master, text="", font=('Arial', 12, 'italic'), fg='gray')
+        self.general_stats_label.pack(pady=(0, 20))
 
         self.score = 0
         self.current_question = None
@@ -49,7 +54,16 @@ class FlashcardApp:
             }
             self.save_history()
 
+        self.update_general_statistics()
         self.next_question()
+
+
+    def update_general_statistics(self):
+        # Calculate overall percentage of correct answers across all questions
+        total_correct = sum(entry['correct'] for entry in self.history.values())
+        total_attempts = sum(entry['correct'] + entry['incorrect'] for entry in self.history.values())
+        overall_accuracy = (total_correct / total_attempts) * 100 if total_attempts > 0 else 0
+        self.general_stats_label.config(text=f"Overall Accuracy: {overall_accuracy:.1f}% correct")
 
     def save_history(self):
         with open(self.history_file, "w") as file:
@@ -97,6 +111,7 @@ class FlashcardApp:
             )
 
         self.save_history()
+        self.update_general_statistics()
         self.next_question()
 
 
