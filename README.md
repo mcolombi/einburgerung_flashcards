@@ -6,7 +6,7 @@ The only dependency that is a little tricky to handle is `tkinter` as it creates
 
 Running `main.py` creates flashcards of the form
 
-<img width="488" alt="image" src="https://github.com/user-attachments/assets/5e9cec9a-65b9-4c74-8990-614cb17892c6">
+<img width="484" alt="Screenshot 2024-11-01 at 08 53 44" src="https://github.com/user-attachments/assets/a34b56bb-d8b0-4e6a-a2ea-39acf6a9db02">
 
 A history of correct / wrong answers is kept in a history file in the `data` folder and the probabilty of seeing a question increases every time it is answered incorrectly and decereases every time it was answered correctly.
 
