@@ -8,7 +8,7 @@ Running `main.py` creates flashcards of the form
 
 <img width="484" alt="Screenshot 2024-11-01 at 08 53 44" src="https://github.com/user-attachments/assets/a34b56bb-d8b0-4e6a-a2ea-39acf6a9db02">
 
-A history of correct / wrong answers is kept in a history file in the `data` folder and the probabilty of seeing a question increases every time it is answered incorrectly and decereases every time it was answered correctly.
+A history of correct / wrong answers is kept in a history file in the `data` folder and the probabilty of seeing a question increases every time it is answered incorrectly and decereases every time it is answered correctly.
 
 You can control how often you see questions you got wrong by changing the parameter `WRONG_ANSWER_PROBABILITY_MULTIPLIER` in `settings.py`. Every time you get an answer wrong the probability of selecting that question (comparatively to other questions) is multiplied by this factor. If you get the question right it is divided by this factor.
 
