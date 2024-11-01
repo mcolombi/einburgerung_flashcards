@@ -827,12 +827,12 @@
                 "Wenn der persönliche Computer nicht genügend geschützt ist.",
                 "Wenn eine Person auf einer öffentlichen Strasse fotografiert wird.",
                 "Wenn eine Zeitung über eine Person berichtet.",
-                "Wenn private Informationen über einzelne Personen ohne gesetzliche Grundlage"
+                "Wenn private Informationen über einzelne Personen ohne gesetzliche Grundlage oder ohne Zustimmung der Person veröffentlicht werden."
             ],
             "correct_answer": "Wenn private Informationen über einzelne Personen ohne gesetzliche Grundlage"
         },
         {
-            "question": "oder ohne Zustimmung der Person veröffentlicht werden. Was verbietet die Schweizer Bundesverfassung?",
+            "question": "Was verbietet die Schweizer Bundesverfassung?",
             "answers": [
                 "Man darf im öffentlichen Raum keine religiösen Zeichen tragen.",
                 "Man darf keine Sammelaktionen für notleidende Menschen durchführen.",
