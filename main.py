@@ -1,10 +1,10 @@
-import tkinter as tk
-from tkinter import messagebox
-import random
 import json
 import os
+import random
+import tkinter as tk
+from tkinter import messagebox
 
-from constants import WRONG_ANSWER_PROBABILITY_MULTIPLIER
+from settings import HISTORY_FILE, QUESTIONS_FILE, WRONG_ANSWER_PROBABILITY_MULTIPLIER
 
 
 class FlashcardApp:
@@ -16,7 +16,6 @@ class FlashcardApp:
             master, text="", wraplength=400, font=("Arial", 14)
         )
         self.question_label.pack(pady=20)
-
 
         self.answer_buttons = []
         for i in range(4):
@@ -33,18 +32,20 @@ class FlashcardApp:
             self.answer_buttons.append(button)
 
         # Label for displaying accuracy
-        self.general_stats_label = tk.Label(master, text="", font=('Arial', 12, 'italic'), fg='gray')
+        self.general_stats_label = tk.Label(
+            master, text="", font=("Arial", 12, "italic"), fg="gray"
+        )
         self.general_stats_label.pack(pady=(0, 20))
 
         self.score = 0
         self.current_question = None
 
         # Load questions data
-        with open("data/questions.json", "r") as file:
+        with open(f"data/{QUESTIONS_FILE}", "r") as file:
             self.data = json.load(file)["questions"]
 
         # Load or initialize history data
-        self.history_file = "data/history.json"
+        self.history_file = f"data/{HISTORY_FILE}"
         if os.path.exists(self.history_file):
             with open(self.history_file, "r") as file:
                 self.history = json.load(file)
@@ -57,13 +58,24 @@ class FlashcardApp:
         self.update_general_statistics()
         self.next_question()
 
-
     def update_general_statistics(self):
         # Calculate overall percentage of correct answers across all questions
-        total_correct = sum(entry['correct'] for entry in self.history.values())
-        total_attempts = sum(entry['correct'] + entry['incorrect'] for entry in self.history.values())
-        overall_accuracy = (total_correct / total_attempts) * 100 if total_attempts > 0 else 0
-        self.general_stats_label.config(text=f"Overall Accuracy: {overall_accuracy:.1f}% correct")
+        total_correct = sum(entry["correct"] for entry in self.history.values())
+        total_attempts = sum(
+            entry["correct"] + entry["incorrect"] for entry in self.history.values()
+        )
+        overall_accuracy = (
+            (total_correct / total_attempts) * 100 if total_attempts > 0 else 0
+        )
+        coverage = (
+            len([x for x in self.history.values() if x["correct"] or x["incorrect"]])
+            / len(self.history)
+            * 100
+        )
+
+        self.general_stats_label.config(
+            text=f"Overall Accuracy: {overall_accuracy:.1f}% correct \t\t Question Coverage: {coverage:.1f}%"
+        )
 
     def save_history(self):
         with open(self.history_file, "w") as file:
